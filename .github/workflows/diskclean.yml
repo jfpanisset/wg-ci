@@ -2,8 +2,8 @@ name: diskclean
 on:
   workflow_dispatch:
   push:
-  branches:
-    - 'jfpanisset-patch-6'
+    branches:
+      - 'jfpanisset-patch-7'
   pull_request:
 jobs:
   ubuntu-diskclean:
