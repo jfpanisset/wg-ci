@@ -1,0 +1,31 @@
+name: diskclean
+on:
+  workflow_dispatch:
+jobs:
+  ubuntu-diskclean:
+    # ubuntu-latest aka ubuntu-24.04 starts out with 2GB more free disk space than ubuntu-22.04
+    runs-on: ubuntu-latest
+    # runs-on: ubuntu-22.04
+    #container:
+      # image: aswf/ci-oiio:2026
+      # image: aswf/ci-common:6
+      # image: aswf/ci-common:4
+      # image: nvidia/cuda:12.9.1-runtime-rockylinux8
+      # options: -v /:/host/root
+    steps:
+       - name: disk space before cleanup
+         run: |
+           df -h /
+           # df -h /host/root
+       - name: Android NDK sizes
+         run : |
+           du -ksh /usr/local/lib/android/*
+       - name: clean up some stuff
+         run: |
+           sudo rm -rf /usr/share/dotnet \
+            /usr/local/lib/android \
+            /usr/local/.ghcup
+       - name: any more disk space after cleanup?
+         run: |
+           df -h /
+           # df -h /host/root
